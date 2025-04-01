@@ -1,15 +1,18 @@
 
 /**
- * Write a description of class Horse here.
+ * Horse data will be handled here
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Usman Siddiqui
+ * @version 1.0
  */
 public class Horse
 {
     //Fields of class Horse
-    
-    
+    private String horseName;
+    private char horseSymbol;
+    private double horseConfidence;
+    private int distanceTravelled = 0;
+    private boolean hasFallen = false;
       
     //Constructor of class Horse
     /**
@@ -17,9 +20,10 @@ public class Horse
      */
     public Horse(char horseSymbol, String horseName, double horseConfidence)
     {
-       
+        this.horseName = horseName;
+        this.horseSymbol = horseSymbol;
+        this.horseConfidence = horseConfidence;
     }
-    
     
     
     //Other methods of class Horse
