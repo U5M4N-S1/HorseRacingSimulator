@@ -10,6 +10,16 @@ import java.lang.Math;
  */
 public class Race
 {
+    public static void main(String[] args) {
+        Race race = new Race(10);
+        Horse horse1 = new Horse('\u265E', "Pippi Longstocking", 0.6);
+        Horse horse2 = new Horse('\u2658',"Kokomo" , 0.6);
+        Horse horse3 = new Horse('\u2655', "El Jefe", 0.4);
+        race.addHorse(horse1, 1);
+        race.addHorse(horse2, 2);
+        race.addHorse(horse3, 3);
+        race.startRace();
+    }
     private int raceLength;
     private Horse lane1Horse;
     private Horse lane2Horse;
