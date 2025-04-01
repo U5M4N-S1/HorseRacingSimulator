@@ -29,52 +29,52 @@ public class Horse
     //Other methods of class Horse
     public void fall()
     {
-        
+        this.hasFallen = true;
     }
     
     public double getConfidence()
     {
-        
+        return this.horseConfidence;
     }
     
     public int getDistanceTravelled()
     {
-        
+        return this.distanceTravelled;
     }
     
     public String getName()
     {
-        
+        return this.horseName;
     }
     
     public char getSymbol()
     {
-        
+        return this.horseSymbol;
     }
     
     public void goBackToStart()
     {
-        
+        this.distanceTravelled = 0;
     }
     
     public boolean hasFallen()
     {
-        
+        return this.hasFallen;
     }
 
     public void moveForward()
     {
-        
+        this.distanceTravelled += 1;
     }
 
     public void setConfidence(double newConfidence)
     {
-        
+        this.horseConfidence = newConfidence;
     }
     
     public void setSymbol(char newSymbol)
     {
-        
+        this.horseSymbol = newSymbol;
     }
     
 }
