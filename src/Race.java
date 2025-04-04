@@ -95,14 +95,17 @@ public class Race
             //if any of the three horses has won the race is finished, and the display the winner
             if (raceWonBy(lane1Horse)) {
                 System.out.println("And the winner is... " +lane1Horse.getName()+ "!");
+                lane1Horse.setConfidence(lane1Horse.getConfidence() + 0.05);
                 finished = true;
             }
             else if (raceWonBy(lane2Horse)) {
                 System.out.println("And the winner is... " + lane2Horse.getName()+ "!");
+                lane2Horse.setConfidence(lane2Horse.getConfidence() + 0.05);
                 finished = true;
             }
             else if (raceWonBy(lane3Horse)) {
                 System.out.println("And the winner is... " + lane3Horse.getName()+ "!");
+                lane3Horse.setConfidence(lane3Horse.getConfidence() + 0.05);
                 finished = true;
             }
            
