@@ -29,6 +29,7 @@ public class Horse
     //Other methods of class Horse
     public void fall()
     {
+        this.setConfidence(this.horseConfidence -= 0.05);
         this.hasFallen = true;
     }
     
@@ -69,7 +70,10 @@ public class Horse
 
     public void setConfidence(double newConfidence)
     {
-        this.horseConfidence = newConfidence;
+        if (newConfidence > 1 || newConfidence < 0)
+            return;
+        else
+            this.horseConfidence = newConfidence;
     }
     
     public void setSymbol(char newSymbol)
