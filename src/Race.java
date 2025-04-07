@@ -1,5 +1,7 @@
 import java.util.concurrent.TimeUnit;
 import java.lang.Math;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A three-horse race, each horse running in its own lane
@@ -8,17 +10,32 @@ import java.lang.Math;
  * @author McRaceface
  * @version 1.0
  */
-public class Race
+public class Race extends JPanel
 {
+    private static int width = 900;
+    private static int height = 600;
+
     public static void main(String[] args) {
+        JFrame frame = new JFrame("Horse Racing Simulator");
+        frame.setSize(width, height);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Race race = new Race(10);
-        Horse horse1 = new Horse('\u265E', "Pippi Longstocking", 0.6);
-        Horse horse2 = new Horse('\u2658',"Kokomo" , 0.6);
-        Horse horse3 = new Horse('\u2655', "El Jefe", 0.4);
-        race.addHorse(horse1, 1);
-        race.addHorse(horse2, 2);
-        race.addHorse(horse3, 3);
-        race.startRace();
+        frame.add(race);
+        frame.pack();
+
+        frame.setVisible(true);
+
+        // Race race = new Race(10);
+        // Horse horse1 = new Horse('\u265E', "Pippi Longstocking", 0.6);
+        // Horse horse2 = new Horse('\u2658',"Kokomo" , 0.6);
+        // Horse horse3 = new Horse('\u2655', "El Jefe", 0.4);
+        // race.addHorse(horse1, 1);
+        // race.addHorse(horse2, 2);
+        // race.addHorse(horse3, 3);
+        // race.startRace();
     }
     private int raceLength;
     private Horse lane1Horse;
@@ -33,6 +50,7 @@ public class Race
      */
     public Race(int distance)
     {
+        setPreferredSize(new Dimension(width, height));
         // initialise instance variables
         raceLength = distance;
         lane1Horse = null;
