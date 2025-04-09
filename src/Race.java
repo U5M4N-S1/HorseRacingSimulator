@@ -12,31 +12,6 @@ import java.awt.*;
  */
 public class Race extends JPanel
 {
-    private static int width = 900;
-    private static int height = 600;
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Horse Racing Simulator");
-        frame.setSize(width, height);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        Race race = new Race(10);
-        frame.add(race);
-        frame.pack();
-
-        frame.setVisible(true);
-
-        // Race race = new Race(10);
-        // Horse horse1 = new Horse('\u265E', "Pippi Longstocking", 0.6);
-        // Horse horse2 = new Horse('\u2658',"Kokomo" , 0.6);
-        // Horse horse3 = new Horse('\u2655', "El Jefe", 0.4);
-        // race.addHorse(horse1, 1);
-        // race.addHorse(horse2, 2);
-        // race.addHorse(horse3, 3);
-        // race.startRace();
-    }
     private int raceLength;
     private Horse lane1Horse;
     private Horse lane2Horse;
@@ -50,7 +25,7 @@ public class Race extends JPanel
      */
     public Race(int distance)
     {
-        setPreferredSize(new Dimension(width, height));
+        setPreferredSize(new Dimension(900, 600));
         // initialise instance variables
         raceLength = distance;
         lane1Horse = null;
