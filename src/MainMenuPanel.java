@@ -33,7 +33,7 @@ class MainMenuPanel extends JPanel {
 
         JButton playBtn = new JButton("Play");
         JButton customiseBtn = new JButton("Customise");
-        JButton exitBtn = new JButton("Exit Game");
+        JButton exitBtn = new JButton("Exit");
 
         playBtn.setBounds(350, 100, 200, 40);
         customiseBtn.setBounds(350, 150, 200, 40);
