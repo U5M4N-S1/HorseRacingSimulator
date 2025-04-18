@@ -61,6 +61,7 @@ public class Horse
     public void goBackToStart()
     {
         this.distanceTravelled = 0;
+        this.hasFallen = false;
     }
     
     public boolean hasFallen()
@@ -102,5 +103,9 @@ public class Horse
         this.coatColor = coatColor;
     }
     
+    @Override
+    public String toString() {
+        return horseName + " " + horseSymbol;
+    }
 
 }
