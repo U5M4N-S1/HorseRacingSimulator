@@ -62,8 +62,15 @@ public class Race
                 //print the race positions
                 printRace();
                 if (raceWonBy(theHorse)) {
+                    //print winner
                     System.out.println("And the winner is... " +theHorse.getName()+ "!");
                     theHorse.setConfidence(theHorse.getConfidence() + 0.05);
+                    finished = true;
+                    break;
+                }
+                //check if all horses fell
+                if(allHorsesFell()) {
+                    System.out.println("All horses have fallen! There is no winner.");
                     finished = true;
                     break;
                 }
@@ -196,5 +203,15 @@ public class Race
             System.out.print(aChar);
             i = i + 1;
         }
+    }
+
+    private boolean allHorsesFell() {
+        for (int i = 0; i < horses.size(); i++) {
+            if (!horses.get(i).hasFallen()) {
+                return false;
+            }
+        }
+        // All horses have fallen
+        return true;
     }
 }
