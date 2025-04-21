@@ -130,11 +130,11 @@ public class Race extends JPanel
             g.setColor(Color.DARK_GRAY);
             g.fillRect(startX, y, laneWidth, laneHeight);
 
-            // Start and finish lines
+            //finish line
             g.setColor(Color.WHITE);
-            g.fillRect(startX, y, 5, laneHeight);
             g.fillRect(startX + laneWidth - 5, y, 5, laneHeight);
 
+            //draw horses
             Horse horse = horses.get(i);
             if (horse != null) {
                 double progress = (double) horse.getDistanceTravelled() / raceLength;
@@ -169,48 +169,46 @@ public class Race extends JPanel
                 drawHorse(g, horse, x, y);
             }
         }
-
-        // Finish line
-        g.setColor(Color.WHITE);
-       // g.fillRect(centerX + radiusX - 5, centerY - 100, 5, 200);
     }
 
     private void drawFigure8Track(Graphics g) {
         int centerX = 450;
         int centerY = 300;
-        int radius = 100;
-        int laneSpacing = 20;
-
+        int radius = 200;
+        int laneSpacing = 30;
+        int loopOffset = 150;
+        //draw track
         for (int i = 0; i < horses.size(); i++) {
             int r = radius - i * laneSpacing;
-
-            // Thicker track
+    
             g.setColor(Color.GRAY);
-            g.fillOval(centerX - r - 75, centerY - r, 2 * r, 2 * r);
-            g.fillOval(centerX - r + 75, centerY - r, 2 * r, 2 * r);
-
+            g.fillOval(centerX - r - loopOffset, centerY - r, 2 * r, 2 * r);
+            g.fillOval(centerX - r + loopOffset, centerY - r, 2 * r, 2 * r);
+    
             g.setColor(getBackground());
-            g.fillOval(centerX - r - 75 + 8, centerY - r + 8, 2 * (r - 8), 2 * (r - 8));
-            g.fillOval(centerX - r + 75 + 8, centerY - r + 8, 2 * (r - 8), 2 * (r - 8));
-
+            g.fillOval(centerX - r - loopOffset + 12, centerY - r + 12, 2 * (r - 12), 2 * (r - 12));
+            g.fillOval(centerX - r + loopOffset + 12, centerY - r + 12, 2 * (r - 12), 2 * (r - 12));
+        }
+        //draw horses
+        for (int i = 0; i < horses.size(); i++) {
+            int r = radius - i * laneSpacing;
             Horse horse = horses.get(i);
             if (horse != null) {
                 double progress = (double) horse.getDistanceTravelled() / raceLength;
                 double angle = 2 * Math.PI * progress;
-                double centerOffsetX = 75 * Math.cos(angle);
+                double centerOffsetX = loopOffset * Math.cos(angle);
                 int x = (int) (centerX + centerOffsetX + r * Math.cos(angle));
                 int y = (int) (centerY + r * Math.sin(angle));
                 drawHorse(g, horse, x, y);
             }
         }
-
-        // Finish line
-        g.setColor(Color.WHITE);
-       // g.fillRect(centerX + 75 - 5, centerY - 100, 5, 200);
     }
+    
+    
+    
 
     private void drawHorse(Graphics g, Horse horse, int x, int y) {
-        int size = 30; // bigger horse size
+        int size = 30;
         g.setColor(horse.getCoatColor());
         g.fillOval(x - size/2, y - size/2, size, size);
 
@@ -235,6 +233,10 @@ public class Race extends JPanel
 
     public ArrayList<Horse> getHorses() {
         return horses;
+    }
+    
+    public void setRaceLength(int length) {
+        this.raceLength = length;
     }
     
 }
