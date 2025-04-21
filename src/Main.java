@@ -21,14 +21,17 @@ public class Main {
 class MasterPanel extends JPanel {
     private CardLayout layout;
     private Race race;
+    private CustomisePanel customise;
     private  MainMenuPanel menu;
 
     public MasterPanel() {
         layout = new CardLayout();
         setLayout(layout);
         race = new Race();
+        customise = new CustomisePanel(this);
         menu = new MainMenuPanel(this);
         add(race, "race");
+        add(customise, "customise");
         add(menu, "menu");
 
   
@@ -42,6 +45,9 @@ class MasterPanel extends JPanel {
 
     //method to switch panels
     public void switchTo(String name) {
+        if (name.equals("customise")) {
+            customise.updateHorseList();
+        }
         layout.show(this, name);
     }
 

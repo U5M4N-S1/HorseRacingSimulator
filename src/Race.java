@@ -10,6 +10,7 @@ public class Race extends JPanel
     private int raceLength;
     private int width = 900;
     public String track = "oval"; // "line", "oval", or "figure8"
+    public String weather = "dry"; // "clear", "icy" or "muddy"
     boolean finished = false;
     private String winnerText = "";
     private JButton restartButton;
@@ -137,7 +138,7 @@ public class Race extends JPanel
             Horse horse = horses.get(i);
             if (horse != null) {
                 double progress = (double) horse.getDistanceTravelled() / raceLength;
-                int horseX = startX + (int)(progress * (laneWidth - 10)); // Adjust for start/finish borders
+                int horseX = startX + (int)(progress * (laneWidth - 10));
                 int horseY = y + laneHeight / 2;
                 drawHorse(g, horse, horseX, horseY);
             }
@@ -154,8 +155,6 @@ public class Race extends JPanel
         for (int i = 0; i < horses.size(); i++) {
             int rX = radiusX - i * laneSpacing;
             int rY = radiusY - i * laneSpacing;
-
-            // Thicker track
             g.setColor(Color.GRAY);
             g.fillOval(centerX - rX, centerY - rY, 2 * rX, 2 * rY);
             g.setColor(getBackground());
