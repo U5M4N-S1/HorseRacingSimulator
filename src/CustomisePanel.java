@@ -15,6 +15,7 @@ class CustomisePanel extends JPanel {
     private JSpinner lengthSpinner;
     private JButton applyButton;
     private JButton returnButton;
+    private JButton startRaceButton;
     private Image backgroundImage;
 
     private HashMap<String, Color> coatColorMap;
@@ -116,7 +117,7 @@ class CustomisePanel extends JPanel {
                     Color color = coatColorMap.get(selectedColorName);
                     selectedHorse.setCoatColor(color);
 
-                    JOptionPane.showMessageDialog(CustomisePanel.this, "Horse updated!");
+                    JOptionPane.showMessageDialog(CustomisePanel.this, "Horses and track updated");
                 }
 
                 // Update race settings
@@ -136,13 +137,33 @@ class CustomisePanel extends JPanel {
         returnButton = new JButton("Return to Menu");
         gbc.gridx = 0;
         gbc.gridy = 8;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         add(returnButton, gbc);
 
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 master.switchTo("menu");
+            }
+        });
+        
+        startRaceButton = new JButton("Start Race");
+        gbc.gridx = 1;
+        gbc.gridy = 8;
+        gbc.gridwidth = 1;
+        add(startRaceButton, gbc);
+        
+        startRaceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //apply any changes
+                ActionEvent applyEvent = new ActionEvent(applyButton, ActionEvent.ACTION_PERFORMED, "apply");
+                for (ActionListener listener : applyButton.getActionListeners()) {
+                    listener.actionPerformed(applyEvent);
+                }
+                
+                master.switchTo("race");
+                master.getRace().startRace();
             }
         });
     }
