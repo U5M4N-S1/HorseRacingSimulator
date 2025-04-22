@@ -1,4 +1,4 @@
-import javax.swing.*; 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,9 @@ class CustomisePanel extends JPanel {
     private JComboBox<String> symbolSelector;
     private JComboBox<String> breedSelector;
     private JComboBox<String> coatColorSelector;
+    private JComboBox<String> trackSelector;
+    private JComboBox<String> weatherSelector;
+    private JSpinner lengthSpinner;
     private JButton applyButton;
     private JButton returnButton;
     private Image backgroundImage;
@@ -27,13 +30,13 @@ class CustomisePanel extends JPanel {
         coatColorMap = new HashMap<>();
         coatColorMap.put("Black", Color.BLACK);
         coatColorMap.put("Blue", Color.BLUE);
-        coatColorMap.put("Red", Color.RED);
         coatColorMap.put("Green", Color.GREEN);
+        coatColorMap.put("Yellow", Color.YELLOW);
         coatColorMap.put("Cyan", Color.CYAN);
         coatColorMap.put("Pink", Color.PINK);
         coatColorMap.put("Orange", Color.ORANGE);
 
-        //Horse selector
+        //horse selector
         horseSelector = new JComboBox<>();
         updateHorseList();
         gbc.gridx = 0;
@@ -42,7 +45,7 @@ class CustomisePanel extends JPanel {
         gbc.gridx = 1;
         add(horseSelector, gbc);
 
-        //symbola selector
+        //symbol selector
         symbolSelector = new JComboBox<>(new String[]{
             "🐴", "🦓", "🦄", "🐎", "🐆", "🐂", "🐃", "🦌"
         });
@@ -62,7 +65,7 @@ class CustomisePanel extends JPanel {
         gbc.gridx = 1;
         add(breedSelector, gbc);
 
-        // Colour selector
+        //colour selector
         coatColorSelector = new JComboBox<>(coatColorMap.keySet().toArray(new String[0]));
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -70,10 +73,34 @@ class CustomisePanel extends JPanel {
         gbc.gridx = 1;
         add(coatColorSelector, gbc);
 
-        // Apply button
-        applyButton = new JButton("Apply Changes");
+        //track selector
+        trackSelector = new JComboBox<>(new String[]{"line", "oval", "figure8"});
         gbc.gridx = 0;
         gbc.gridy = 4;
+        add(new JLabel("Select Track:"), gbc);
+        gbc.gridx = 1;
+        add(trackSelector, gbc);
+
+        //weather selector
+        weatherSelector = new JComboBox<>(new String[]{"clear", "icy", "muddy"});
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        add(new JLabel("Select Weather:"), gbc);
+        gbc.gridx = 1;
+        add(weatherSelector, gbc);
+
+        //race length
+        lengthSpinner = new JSpinner(new SpinnerNumberModel(20, 5, 100, 1));
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        add(new JLabel("Set Race Length:"), gbc);
+        gbc.gridx = 1;
+        add(lengthSpinner, gbc);
+
+        //Apply button
+        applyButton = new JButton("Apply Changes");
+        gbc.gridx = 0;
+        gbc.gridy = 7;
         gbc.gridwidth = 2;
         add(applyButton, gbc);
 
@@ -85,22 +112,30 @@ class CustomisePanel extends JPanel {
                     selectedHorse.setSymbol((String) symbolSelector.getSelectedItem());
                     selectedHorse.setBreed((String) breedSelector.getSelectedItem());
 
-                    // Color from map
                     String selectedColorName = (String) coatColorSelector.getSelectedItem();
                     Color color = coatColorMap.get(selectedColorName);
                     selectedHorse.setCoatColor(color);
 
                     JOptionPane.showMessageDialog(CustomisePanel.this, "Horse updated!");
-
-                    updateHorseList();
                 }
+
+                // Update race settings
+                String selectedTrack = (String) trackSelector.getSelectedItem();
+                String selectedWeather = (String) weatherSelector.getSelectedItem();
+                int selectedLength = (Integer) lengthSpinner.getValue();
+
+                master.getRace().track = selectedTrack;
+                master.getRace().weather = selectedWeather;
+                master.getRace().setRaceLength(selectedLength);
+
+                updateHorseList();
             }
         });
 
-        // Return to Menu button
+        // Return to menu button
         returnButton = new JButton("Return to Menu");
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 8;
         gbc.gridwidth = 2;
         add(returnButton, gbc);
 
