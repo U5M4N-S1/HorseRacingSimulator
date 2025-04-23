@@ -9,8 +9,8 @@ public class Race extends JPanel
     private ArrayList<Horse> horses = new ArrayList<>();
     private int raceLength;
     private int width = 900;
-    public String track = "oval"; // "line", "oval", or "figure8"
-    public String weather = "dry"; // "clear", "icy" or "muddy"
+    public String track = "oval"; // "line", "oval", "figure8"
+    public String weather = "dry"; // "clear", "icy", "muddy"
     boolean finished = false;
     private String winnerText = "";
     private JButton restartButton;
@@ -72,20 +72,28 @@ public class Race extends JPanel
         }).start();
     }
 
-    private void moveHorse(Horse theHorse)
+    private void moveHorse(Horse theHorse) {
+    if (!theHorse.hasFallen())
     {
-        if (!theHorse.hasFallen())
+        if (Math.random() < theHorse.getConfidence())
         {
-            if (Math.random() < theHorse.getConfidence())
-            {
-                theHorse.moveForward();
-            }
-            if (Math.random() < (0.1 * theHorse.getConfidence() * theHorse.getConfidence()))
-            {
-                theHorse.fall();
-            }
+            theHorse.moveForward();
+        }
+
+        double fallChance = 0.1 * theHorse.getConfidence() * theHorse.getConfidence();
+        
+        //increase fall chance based on weather
+        if (weather.equals("icy")) {
+            fallChance *= 2;
+        } else if (weather.equals("muddy")) {
+            fallChance *= 1.5;
+        }
+        if (Math.random() < fallChance)
+        {
+            theHorse.fall();
         }
     }
+}
         
     private boolean raceWonBy(Horse theHorse)
     {
