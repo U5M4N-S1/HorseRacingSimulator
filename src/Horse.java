@@ -4,11 +4,9 @@ import java.awt.*;
  * Horse data will be handled here
  * 
  * @author Usman Siddiqui
- * @version 1.0
+ * @version 2.0
  */
-public class Horse
-{
-    //Fields of class Horse
+public class Horse {
     private String horseName;
     private String horseSymbol;
     private double horseConfidence;
@@ -16,74 +14,58 @@ public class Horse
     private boolean hasFallen = false;
     private String breed;
     private Color coatColor;
-      
-    //Constructor of class Horse
-    /**
-     * Constructor for objects of class Horse
-     */
-    public Horse(String horseSymbol, String horseName, double horseConfidence, String breed, Color coatColor)
-    {
+    private int wins = 0;
+    private int losses = 0;
+
+    public Horse(String horseSymbol, String horseName, double horseConfidence, String breed, Color coatColor) {
         this.horseName = horseName;
         this.horseSymbol = horseSymbol;
         this.horseConfidence = horseConfidence;
         this.breed = breed;
         this.coatColor = coatColor;
     }
-    
-    
-    //Other methods of class Horse
-    public void fall()
-    {
-        this.setConfidence(this.horseConfidence -= 0.05);
+
+    public void fall() {
+        this.setConfidence(this.horseConfidence - 0.05);
         this.hasFallen = true;
     }
-    
-    public double getConfidence()
-    {
+
+    public double getConfidence() {
         return this.horseConfidence;
     }
-    
-    public int getDistanceTravelled()
-    {
+
+    public int getDistanceTravelled() {
         return this.distanceTravelled;
     }
-    
-    public String getName()
-    {
+
+    public String getName() {
         return this.horseName;
     }
-    
-    public String getSymbol()
-    {
+
+    public String getSymbol() {
         return this.horseSymbol;
     }
-    
-    public void goBackToStart()
-    {
+
+    public void goBackToStart() {
         this.distanceTravelled = 0;
         this.hasFallen = false;
     }
-    
-    public boolean hasFallen()
-    {
+
+    public boolean hasFallen() {
         return this.hasFallen;
     }
 
-    public void moveForward()
-    {
+    public void moveForward() {
         this.distanceTravelled += 1;
     }
 
-    public void setConfidence(double newConfidence)
-    {
-        if (newConfidence > 1 || newConfidence < 0)
-            return;
-        else
+    public void setConfidence(double newConfidence) {
+        if (newConfidence >= 0 && newConfidence <= 1) {
             this.horseConfidence = newConfidence;
+        }
     }
-    
-    public void setSymbol(String newSymbol)
-    {
+
+    public void setSymbol(String newSymbol) {
         this.horseSymbol = newSymbol;
     }
 
@@ -98,14 +80,29 @@ public class Horse
     public Color getCoatColor() {
         return coatColor;
     }
-    
+
     public void setCoatColor(Color coatColor) {
         this.coatColor = coatColor;
     }
-    
+
+    public int getWins() {
+        return wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public void addWin() {
+        wins++;
+    }
+
+    public void addLoss() {
+        losses++;
+    }
+
     @Override
     public String toString() {
         return horseName + " " + horseSymbol;
     }
-
 }
